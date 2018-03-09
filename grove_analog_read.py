@@ -1,11 +1,12 @@
-GrovePi
-=======
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+#!/usr/bin/env python
+#
+# GrovePi Example for using the analog read command to read analog sensor values
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +31,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
 
+import time
+import grovepi
 
+#Sensor connected to A0 Port 
+sensor = 14		# Pin 14 is A0 Port.
+grovepi.pinMode(sensor,"INPUT")
+while True:
+    try:
+        sensor_value = grovepi.analogRead(sensor)
 
+        print ("sensor_value = %d" %sensor_value)
+        time.sleep(.5)
+
+    except IOError:
+        print ("Error")

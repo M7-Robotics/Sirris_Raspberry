@@ -1,11 +1,12 @@
-GrovePi
-=======
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+#!/usr/bin/env python
+#
+# GrovePi Example for using the Grove Relay (http://www.seeedstudio.com/wiki/Grove_-_Relay)
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +31,31 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
+# NOTE: Relay is normally open. LED will illuminate when closed and you will hear a definitive click sound
+import time
+import grovepi
 
+# Connect the Grove Relay to digital port D4
+# SIG,NC,VCC,GND
+relay = 4
 
+grovepi.pinMode(relay,"OUTPUT")
 
+while True:
+    try:
+        # switch on for 5 seconds
+        grovepi.digitalWrite(relay,1)
+        print ("on")
+        time.sleep(5)
+
+        # switch off for 5 seconds
+        grovepi.digitalWrite(relay,0)
+        print ("off")
+        time.sleep(5)
+
+    except KeyboardInterrupt:
+        grovepi.digitalWrite(relay,0)
+        break
+    except IOError:
+        print ("Error")

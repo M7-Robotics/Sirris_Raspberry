@@ -1,11 +1,11 @@
-GrovePi
-=======
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+#!/usr/bin/env python3
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+# Connect the Grove DHT Sensor (Blue One) to Port 4 in this example.
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +30,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
 
+from grove_dht import Dht # from a custom made grovepi-based library import our needed class
+from time import sleep # we need to use the sleep function to delay readings
 
+# Don't forget to run it with Python 3 !!
+# Don't forget to run it with Python 3 !!
+# Don't forget to run it with Python 3 !!
 
+dht_pin = 4 # use Digital Port 4 found on GrovePi
+dht_sensor = Dht(dht_pin) # instantiate a dht class with the appropriate pin
+
+dht_sensor.start() # start collecting from the DHT sensor
+
+try:
+    # do this indefinitely
+    while True:
+
+        print(dht_sensor) # prints values in a nice format
+        sleep(0.8) # wait around 800 ms before the next iteration
+
+# when pressing CTRL-C
+except KeyboardInterrupt:
+    dht_sensor.stop() # stop gathering data

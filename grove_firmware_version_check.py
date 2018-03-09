@@ -1,11 +1,12 @@
-GrovePi
-=======
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+#!/usr/bin/env python
+#
+# GrovePi Example for checking the firmware for the GrovePi
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +31,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
+#
+# NOTE: If you get a version of 255.255.255, they try running the script again, if the issue still persists then you are using an old deprecated firmware
+import grovepi
 
+try:
+    print("GrovePi has firmware version: %s" %grovepi.version())
 
-
+except KeyboardInterrupt:
+    print ("KeyboardInterrupt")
+except IOError:
+   print ("Error")

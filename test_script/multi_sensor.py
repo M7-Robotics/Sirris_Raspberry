@@ -1,11 +1,12 @@
-GrovePi
-=======
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+#!/usr/bin/env python
+#
+# GrovePi Example for using the Grove Dust sensor(http://www.seeedstudio.com/depot/Grove-Dust-Sensor-p-1050.html) with the GrovePi
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +31,26 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
 
+import time
+import grovepi
+import atexit
 
+atexit.register(grovepi.dust_sensor_dis)
 
+grovepi.dust_sensor_en()
+
+while True:
+    try:
+		[new_val,lowpulseoccupancy] = grovepi.dustSensorRead()
+		[temp,humidity] = grovepi.dht(4,1)
+		a0 = grovepi.analogRead(0)
+		a1 = grovepi.analogRead(1)
+		a2 = grovepi.analogRead(2)
+		print(new_val,lowpulseoccupancy,"temp =", temp, " humidity =", humidity,"a0",a0,"a1",a1,"a2",a2)
+
+    except:
+        print ("Error")
+	
+		

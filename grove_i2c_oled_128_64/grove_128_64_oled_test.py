@@ -1,11 +1,12 @@
-GrovePi
-=======
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+#!/usr/bin/env python
+#
+# GrovePi example for the basic functions of Grove 128x64 OLED (http://www.seeedstudio.com/depot/Grove-OLED-Display-112-p-781.html)
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +31,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
 
+import grove_128_64_oled as oled
 
+oled.init()  #initialze SEEED OLED display
 
+oled.clearDisplay()          #clear the screen and set start position to top left corner
+oled.setNormalDisplay()      #Set display to normal mode (i.e non-inverse mode)
+oled.setPageMode()           #Set addressing mode to Page Mode
+for i in range(6):
+	oled.setTextXY(i,i)          #Set the cursor to Xth Page, Yth Column  
+	oled.putString("Hello World!") #Print the String

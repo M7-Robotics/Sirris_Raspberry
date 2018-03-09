@@ -1,11 +1,13 @@
-GrovePi
-=======
+#!/usr/bin/env python
+#
+# GrovePi Example for using the Grove Moisture Sensor (http://www.seeedstudio.com/wiki/Grove_-_Moisture_sensor)
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
 
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +32,36 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
 
+# NOTE:
+# 	The wiki suggests the following sensor values:
+# 		Min  Typ  Max  Condition
+# 		0    0    0    sensor in open air
+# 		0    20   300  sensor in dry soil
+# 		300  580  700  sensor in humid soil
+# 		700  940  950  sensor in water
+	
+# 	Sensor values observer: 
+# 		Val  Condition
+# 		0    sensor in open air
+# 		18   sensor in dry soil
+# 		425  sensor in humid soil
+# 		690  sensor in water
 
+import time
+import grovepi
 
+# Connect the Grove Moisture Sensor to analog port A0
+# SIG,NC,VCC,GND
+sensor = 0
+
+while True:
+    try:
+        print(grovepi.analogRead(sensor))
+        time.sleep(.5)
+
+    except KeyboardInterrupt:
+        break
+    except IOError:
+        print ("Error")

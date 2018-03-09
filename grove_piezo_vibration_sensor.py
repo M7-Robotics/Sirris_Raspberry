@@ -1,11 +1,12 @@
-GrovePi
-=======
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+#!/usr/bin/env python
+#
+# GrovePi Example for using the Grove Piezo Vibration Sensor (http://www.seeedstudio.com/wiki/Grove-_Piezo_Vibration_Sensor)
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +31,23 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
+# NOTE: The sensitivity can be adjusted by the onboard potentiometer
 
+import time
+import grovepi
 
+# Connect the Grove Piezo Vibration Sensor to analog port A0
+# OUT,NC,VCC,GND
+piezo = 0
 
+grovepi.pinMode(piezo,"INPUT")
+
+while True:
+    try:
+        # When vibration is detected, the sensor outputs a logic high signal
+        print(grovepi.analogRead(piezo))
+        time.sleep(.5)
+
+    except IOError:
+        print ("Error")

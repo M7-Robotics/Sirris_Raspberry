@@ -1,11 +1,12 @@
-GrovePi
-=======
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+#!/usr/bin/env python
+#
+# GrovePi Example for using the Grove Line Finder (http://www.seeedstudio.com/wiki/Twig_-_Line_Finder)
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +31,26 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
 
+import time
+import grovepi
 
+# Connect the Grove Line Finder to digital port D7
+# SIG,NC,VCC,GND
+line_finder = 7
 
+grovepi.pinMode(line_finder,"INPUT")
+
+while True:
+    try:
+        # Return HIGH when black line is detected, and LOW when white line is detected
+        if grovepi.digitalRead(line_finder) == 1:
+            print ("black line detected")
+        else:
+            print ("white line detected")
+
+        time.sleep(.5)
+
+    except IOError:
+        print ("Error")

@@ -1,11 +1,13 @@
-GrovePi
-=======
+#!/usr/bin/env python
+#
+# GrovePi Example for using the Grove LED for LED Fade effect (http://www.seeedstudio.com/wiki/Grove_-_LED_Socket_Kit)
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
 
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +32,43 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
 
+import time
+import grovepi
 
+# Connect the Grove LED to digital port D5
+# SIG,NC,VCC,GND
+led = 5
 
+# Digital ports that support Pulse Width Modulation (PWM)
+# D3, D5, D6
+
+# Digital ports that do not support PWM
+# D2, D4, D7, D8
+
+grovepi.pinMode(led,"OUTPUT")
+time.sleep(1)
+i = 0
+
+while True:
+    try:
+        # Reset
+        if i > 255:
+            i = 0
+
+        # Current brightness
+        print (i)
+
+        # Give PWM output to LED
+        grovepi.analogWrite(led,i)
+
+        # Increment brightness for next iteration
+        i = i + 20
+        time.sleep(.5)
+
+    except KeyboardInterrupt:
+        grovepi.analogWrite(led,0)
+        break
+    except IOError:
+        print ("Error")

@@ -1,11 +1,12 @@
-GrovePi
-=======
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+#!/usr/bin/env python
+#
+# GrovePi test for multiple digital reads
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://www.dexterindustries.com/forum/?forum=grovepi
+#
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +31,25 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
+import time
+import grovepi
 
+# Connect the Grove Button to digital port D2,D3 and D4
+# SIG,NC,VCC,GND
+button2 = 2
+button3 = 3
+button4 = 4
 
+grovepi.pinMode(button2,"INPUT")
+grovepi.pinMode(button3,"INPUT")
+grovepi.pinMode(button4,"INPUT")
 
+while True:
+	try:
+		d2=grovepi.digitalRead(button2)
+		d3=grovepi.digitalRead(button3)
+		d4=grovepi.digitalRead(button4)
+		print ("%d,%d,%d" %(d2,d3,d4))
+	except IOError:
+		print ("Error")

@@ -1,11 +1,13 @@
-GrovePi
-=======
+#!/usr/bin/env python
+#
+# GrovePi Example for using the Grove 80cm Infrared Proximity Sensor(http://www.seeedstudio.com/wiki/Grove_-_80cm_Infrared_Proximity_Sensor)
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
 
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +32,33 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
 
+import time
+import grovepi
 
+# Connect the Grove 80cm Infrared Proximity Sensor to analog port A0
+# SIG,NC,VCC,GND
+sensor = 0
 
+grovepi.pinMode(sensor,"INPUT")
+time.sleep(1)
+
+# Reference voltage of ADC is 5v
+adc_ref = 5
+
+# Vcc of the grove interface is normally 5v
+grove_vcc = 5
+
+while True:
+    try:
+        # Read sensor value
+        sensor_value = grovepi.analogRead(sensor)
+
+        # Calculate voltage
+        voltage = round((float)(sensor_value) * adc_ref / 1024, 2)
+
+        print("sensor_value =", sensor_value, " voltage =", voltage)
+
+    except IOError:
+        print ("Error")

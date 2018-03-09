@@ -1,11 +1,14 @@
-GrovePi
-=======
-
-GrovePi is an open source platform for connecting Grove Sensors to the Raspberry Pi.
-
-See more at the [GrovePi Site](http://dexterindustries.com/GrovePi/)
-[Dexter Industries](http://www.dexterindustries.com)
-
+#!/usr/bin/env python
+#
+# GrovePi Example for using the Grove - Gesture Sensor v1.0(http://www.seeedstudio.com/depot/Grove-Gesture-p-2463.html)
+#		
+# This example returns a value when a user does an action over the sensor
+#
+# The GrovePi connects the Raspberry Pi and Grove sensors.  You can learn more about GrovePi here:  http://www.dexterindustries.com/GrovePi
+#
+# Have a question about this example?  Ask on the forums here:  http://forum.dexterindustries.com/c/grovepi
+#
+'''
 ## License
 
 The MIT License (MIT)
@@ -30,6 +33,36 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+'''
 
+import grove_gesture_sensor
+import time
 
-
+g=grove_gesture_sensor.gesture()
+g.init()
+while True:
+	gest=g.return_gesture()
+	#Match the gesture
+	if gest==g.FORWARD:
+		print("FORWARD")
+	elif gest==g.BACKWARD:
+		print("BACKWARD")
+	elif gest==g.RIGHT:
+		print("RIGHT")
+	elif gest==g.LEFT:
+		print("LEFT")
+	elif gest==g.UP:
+		print("UP")
+	elif gest==g.DOWN:
+		print("DOWN")
+	elif gest==g.CLOCKWISE:
+		print("CLOCKWISE")
+	elif gest==g.ANTI_CLOCKWISE:
+		print("ANTI_CLOCKWISE")
+	elif gest==g.WAVE:
+		print("WAVE")
+	elif gest==0:
+		print("-")
+	else:
+		print("Error")
+	time.sleep(.1)
